@@ -17,5 +17,19 @@ public class Task012 {
             pwd= sc.nextInt();
         }
         System.out.println("You have entered in portal");
+
+        System.out.println("For 2nd portal");
+
+        String id2;
+        int pwd2;
+        do{
+            System.out.println("you have logged in "+ ++count +" times");
+            System.out.println("Enter login ID = ");
+            id2 = sc.next();
+            System.out.println("Enter Password = ");
+            pwd2= sc.nextInt();
+
+        }while(id2!="Sukh" && pwd2!=12);
+        System.out.println("You have entered in 2nd portal");
     }
 }
