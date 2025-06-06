@@ -43,7 +43,7 @@ enum Element {
         return BY_ATOMIC_WEIGHT.get(weight);
     }
 }
-public class Task016_1{
+public class Task019{
     public static void main(String[] args) {
         Element e1=Element.valueOfLabel("Helium");
         System.out.println(e1.atomicNumber);
