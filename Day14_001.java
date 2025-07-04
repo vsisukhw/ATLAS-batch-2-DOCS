@@ -6,7 +6,7 @@ class Node6{
         data=x;
         next=null;
     }
-}
+} 
 class LList{
     Node6 head;
     void insert(int x){
