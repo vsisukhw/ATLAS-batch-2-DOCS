@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Task012 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int count=0;
+        System.out.println("Enter login ID = ");
+        String id = sc.next();
+        System.out.println("Enter Password = ");
+        int pwd= sc.nextInt();
+        while(id!="Sukhwinder" && pwd!=1234)
+        {
+            System.out.println("you have logged in "+ ++count +" times");
+            System.out.println("Enter login ID = ");
+            id = sc.next();
+            System.out.println("Enter Password = ");
+            pwd= sc.nextInt();
+        }
+        System.out.println("You have entered in portal");
+
+        System.out.println("For 2nd portal");
+
+        String id2;
+        int pwd2;
+        do{
+            System.out.println("you have logged in "+ ++count +" times");
+            System.out.println("Enter login ID = ");
+            id2 = sc.next();
+            System.out.println("Enter Password = ");
+            pwd2= sc.nextInt();
+
+        }while(id2!="Sukh" && pwd2!=12);
+        System.out.println("You have entered in 2nd portal");
+    }
+}
