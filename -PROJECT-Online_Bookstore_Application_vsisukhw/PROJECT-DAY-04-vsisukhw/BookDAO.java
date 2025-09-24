@@ -1,6 +1,6 @@
-package OnlineBookstore.dao;
+package OnlineBookstore.mySql.dao;
 
-import OnlineBookstore.util.DatabaseConnection;
+import OnlineBookstore.mySql.util.DatabaseConnection;
 import OnlineBookstore.model.Book;
 
 import java.sql.*;
