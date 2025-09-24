@@ -1,0 +1,106 @@
+@startuml
+!theme plain
+title OnlineBookstoreSystem - ER Diagram (DynamoDB Tables)
+
+entity Users {
+  *username : String <<PK>>
+  --
+  role : String
+  created_at : String
+  updated_at : String
+}
+
+entity Books {
+  *id : Number <<PK>>
+  --
+  title : String
+  author : String
+  price : Number
+  quantity : Number
+  recommended : Boolean
+  created_at : String
+  updated_at : String
+}
+
+entity Cart {
+  *cart_id : String <<PK>>
+  --
+  username : String <<GSI>>
+  book_id : Number
+  quantity : Number
+  added_at : String
+}
+
+entity Orders {
+  *order_id : Number <<PK>>
+  --
+  username : String <<GSI>>
+  order_total : Number
+  order_status : String
+  order_date : String
+  created_at : String
+}
+
+entity Order_Items {
+  *item_id : String <<PK>>
+  --
+  order_id : Number <<GSI>>
+  book_id : Number
+  title : String
+  author : String
+  price : Number
+  quantity : Number
+  created_at : String
+}
+
+entity Browsing_History {
+  *history_id : String <<PK>>
+  --
+  username : String <<GSI>>
+  book_id : Number
+  viewed_at : String
+}
+
+' Relationships
+Users ||--o{ Cart : "has items"
+Books ||--o{ Cart : "added to"
+
+Users ||--o{ Orders : "places"
+Orders ||--o{ Order_Items : "contains"
+Books ||--o{ Order_Items : "ordered"
+
+Users ||--o{ Browsing_History : "browses"
+Books ||--o{ Browsing_History : "viewed"
+
+' DynamoDB Specific Notes
+note right of Users
+  DynamoDB Table
+  Partition Key: username
+  GSI: role-index
+end note
+
+note right of Books
+  DynamoDB Table
+  Partition Key: id
+  GSI: recommended-index
+end note
+
+note right of Cart
+  DynamoDB Table
+  Partition Key: cart_id
+  GSI: username-index
+end note
+
+note right of Orders
+  DynamoDB Table
+  Partition Key: order_id
+  GSI: username-index
+end note
+
+note right of Order_Items
+  DynamoDB Table
+  Partition Key: item_id
+  GSI: order_id-index
+end note
+
+@enduml
