@@ -36,8 +36,8 @@ public class BookService {
             bookDAO.createBook(new Book("1984", "George Orwell", 3, 13, 8));
             bookDAO.createBook(new Book("Pride and Prejudice", "Jane Austen", 4, 11, 12));
             bookDAO.createBook(new Book("The Catcher in the Rye", "J.D. Salinger", 5, 15, 5));
-            bookDAO.createBook(new Book("Clean Code", "J.D. Salinger", 7, 12, 3));
-            bookDAO.createBook(new Book("Design Pattern", "Vineet Bhardwaj", 8, 5, 9));
+            bookDAO.createBook(new Book("Clean Code", "Robert C. Martin", 7, 45, 3));
+            bookDAO.createBook(new Book("Design Patterns", "Gang of Four", 8, 55, 9));
 
         }
     }
@@ -172,6 +172,7 @@ public class BookService {
                 book.setRecommended(true);
                 bookDAO.updateBook(book);
                 System.out.println("Book recommended successfully");
+
             } else {
                 System.out.println("Book not found");
             }
@@ -192,6 +193,7 @@ public class BookService {
                         "\t|\tPrice = " + book.getPrice() +
                         "\t|\tQuantity = " + book.getQuantity() +
                         "\t|\tRecommended = " + isRecommended);
+
             });
         }
 

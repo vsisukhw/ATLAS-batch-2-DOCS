@@ -1,0 +1,100 @@
+@startuml
+!theme plain
+title Online Bookstore System - Class Diagram
+
+class Book {
+  - int id
+  - String title
+  - String author
+  - int price
+  - int quantity
+  - Boolean isRecommended
+  + Book(String, String, int, int, int)
+  + getId(): int
+  + getTitle(): String
+  + getAuthor(): String
+  + getPrice(): int
+  + getQuantity(): int
+  + getRecommended(): Boolean
+  + setters()
+}
+
+class User {
+  - String userName
+  - String role
+  + getUserName(): String
+  + getRole(): String
+  + setUserName(String): void
+  + setRole(String): void
+}
+
+class Cart {
+  - User user
+  - Map<Book,Integer> items
+  - BookService bookService
+  - CartDAO cartDAO
+  + Cart(BookService, User)
+  + addBook(): void
+  + removeBook(): void
+  + calculateTotal(): void
+  + getCart(): void
+}
+
+class Order {
+  - int orderId
+  - Cart cart
+  - User user
+  - LocalDateTime dateTime
+  - Boolean placed
+  - OrderDAO orderDAO
+  + Order(Cart, User)
+  + placeOrder(): void
+  + showOrderReceipt(): void
+}
+
+class OrderModel {
+  - int orderId
+  - String title
+  - String author
+  - int id
+  - int price
+  - int quantity
+  - int orderTotal
+  - String dateTime
+  - String orderStatus
+  + OrderModel(int, String, String, int, int, int, String, String, int)
+  + getters/setters()
+}
+
+class BookService {
+  + getBookById(int): Book
+  + getAllBooks(): List<Book>
+  + addBook(Book): void
+  + updateBook(Book): void
+  + deleteBook(int): void
+}
+
+class CartDAO {
+  + addBook(Book, int, String): void
+  + removeBook(int, String): void
+  + getCart(String): List<Book>
+  + calculateTotal(String): int
+}
+
+class OrderDAO {
+  + addOrder(): void
+  + viewOrder(): List<OrderModel>
+}
+
+' Relationships
+User ||--|| Cart : owns
+User ||--o{ Order : places
+Cart ||--o{ Book : contains
+Order ||--|| Cart : processes
+Order ||--o{ OrderModel : creates
+OrderModel }o--|| Book : references
+Cart --> BookService : uses
+Cart --> CartDAO : uses
+Order --> OrderDAO : uses
+
+@enduml

@@ -1,20 +1,16 @@
-package OnlineBookstore;
+package OnlineBookstoreSystem.service;
 
-import OnlineBookstore.dao.CartDAO;
-import OnlineBookstore.dao.OrderDAO;
-import OnlineBookstore.model.Book;
-import OnlineBookstore.model.OrderModel;
-import OnlineBookstore.model.User;
+import OnlineBookstoreSystem.model.OrderModel;
+import OnlineBookstoreSystem.model.User;
+import OnlineBookstoreSystem.noSql.dao.OrderDAO;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class Order{
+public class OrderService {
     private int orderId=1;
     public Cart c;
     LocalDateTime dt ;
@@ -23,7 +19,7 @@ public class Order{
     OrderDAO orderDAO;
     //CartDAO cartDAO;
 
-    public Order(Cart c, User u) {
+    public OrderService(Cart c, User u) {
         this.c = c;
         this.u = u;
         orderDAO = new OrderDAO(this.u);
@@ -34,7 +30,7 @@ public class Order{
     //CartDAO cartDAO = new CartDAO(u);
     Scanner sc= new Scanner(System.in);
 
-    public void placeOrder(){
+    public void checkOutService(){
         while(true)
         {
             System.out.println("Place Order (y/n) = ");
@@ -43,7 +39,7 @@ public class Order{
             {
                 if(!c.cartDAO.getCart(u.getUserName()).isEmpty()) {
                     orderDAO.addOrder();
-                    System.out.println("hhhhhhhhhhhh");
+
                 }
                 System.out.println("Order Placed Successfully");
                 System.out.println("Order Id = " + orderId);

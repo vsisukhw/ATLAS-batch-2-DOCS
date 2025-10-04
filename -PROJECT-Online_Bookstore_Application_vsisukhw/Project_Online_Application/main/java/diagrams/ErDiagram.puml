@@ -1,0 +1,104 @@
+@startuml
+!theme plain
+title Online Bookstore System - ER Diagram (MySQL Tables)
+
+entity User {
+  *user_id : BIGINT <<PK>>
+  --
+  username : VARCHAR(100) <<UNIQUE>>
+  role : ENUM('USER','ADMIN')
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity Book {
+  *book_id : BIGINT <<PK>>
+  --
+  title : VARCHAR(255)
+  author : VARCHAR(255)
+  price : DECIMAL(10,2)
+  quantity : INT
+  is_recommended : BOOLEAN
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity Cart {
+  *cart_id : BIGINT <<PK>>
+  --
+  user_id : BIGINT <<FK>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity Cart_Items {
+  *cart_item_id : BIGINT <<PK>>
+  --
+  cart_id : BIGINT <<FK>>
+  book_id : BIGINT <<FK>>
+  quantity : INT
+  added_at : TIMESTAMP
+}
+
+entity Orders {
+  *order_id : BIGINT <<PK>>
+  --
+  user_id : BIGINT <<FK>>
+  order_total : DECIMAL(10,2)
+  order_status : ENUM('PLACED','CANCELLED','SHIPPED','DELIVERED')
+  order_date : TIMESTAMP
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity Order_Items {
+  *order_item_id : BIGINT <<PK>>
+  --
+  order_id : BIGINT <<FK>>
+  book_id : BIGINT <<FK>>
+  quantity : INT
+  price_at_purchase : DECIMAL(10,2)
+  created_at : TIMESTAMP
+}
+
+entity Browsing_History {
+  *history_id : BIGINT <<PK>>
+  --
+  user_id : BIGINT <<FK>>
+  book_id : BIGINT <<FK>>
+  viewed_at : TIMESTAMP
+}
+
+' Relationships
+User ||--|| Cart : "owns"
+Cart ||--o{ Cart_Items : "contains"
+Book ||--o{ Cart_Items : "added to"
+
+User ||--o{ Orders : "places"
+Orders ||--o{ Order_Items : "contains"
+Book ||--o{ Order_Items : "ordered"
+
+User ||--o{ Browsing_History : "browses"
+Book ||--o{ Browsing_History : "viewed"
+
+' Indexes and Constraints
+note right of User
+  Indexes:
+  - UNIQUE(username)
+  - INDEX(role)
+end note
+
+note right of Book
+  Indexes:
+  - INDEX(title)
+  - INDEX(author)
+  - INDEX(is_recommended)
+end note
+
+note right of Orders
+  Indexes:
+  - INDEX(user_id, order_date)
+  - INDEX(order_status)
+end note
+
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+!theme plain
+title Online Bookstore System - Use Case Diagram
+
+left to right direction
+actor Customer as C
+actor Admin as A
+
+rectangle "Online Bookstore System" {
+  ' Customer Use Cases
+  usecase (Browse Books) as UC1
+  usecase (Search Books by Title) as UC2
+  usecase (Search Books by Author) as UC3
+  usecase (View Book Details) as UC4
+  usecase (Add Book to Cart) as UC5
+  usecase (Remove Book from Cart) as UC6
+  usecase (View Cart) as UC7
+  usecase (Calculate Cart Total) as UC8
+  usecase (Place Order) as UC9
+  usecase (View Order History) as UC10
+  usecase (View Order Receipt) as UC11
+  usecase (View Recommended Books) as UC12
+  
+  ' Admin Use Cases
+  usecase (Add New Book) as UC13
+  usecase (Update Book Details) as UC14
+  usecase (Delete Book) as UC15
+  usecase (Set Book Recommendations) as UC16
+  usecase (Manage Inventory) as UC17
+  
+  ' Customer Relationships
+  C --> UC1
+  C --> UC2
+  C --> UC3
+  C --> UC4
+  C --> UC5
+  C --> UC6
+  C --> UC7
+  C --> UC8
+  C --> UC9
+  C --> UC10
+  C --> UC11
+  C --> UC12
+  
+  ' Admin Relationships
+  A --> UC13
+  A --> UC14
+  A --> UC15
+  A --> UC16
+  A --> UC17
+  
+  ' Include/Extend Relationships
+  UC5 .> UC4 : <<include>>
+  UC9 .> UC7 : <<include>>
+  UC9 .> UC8 : <<include>>
+  UC11 .> UC10 : <<extend>>
+}
+
+note right of C
+  Customer can browse, search,
+  manage cart, and place orders
+end note
+
+note right of A
+  Admin can manage books,
+  inventory, and recommendations
+end note
+
+@enduml

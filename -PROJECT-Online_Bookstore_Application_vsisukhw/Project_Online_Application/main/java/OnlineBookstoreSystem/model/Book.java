@@ -1,60 +1,33 @@
 package OnlineBookstoreSystem.model;
 
-public class OrderModel {
+public class Book {
     private String title;
     private String author;
     private int id;
-    private int orderId;
     private int price;
-    private int orderTotal;
     private int quantity;
-    private String dateTime;
-    private String orderStatus;
+    private Boolean isRecommended;
 
-    public OrderModel(int idd,String t, String a, int i, int p, int q,String dt,String os, int ot)
+    public Book(String t, String a, int i, int p, int q)
     {
-        orderId=idd;
         title=t;
         author=a;
         id=i;
         price=p;
         quantity=q;
-        dateTime=dt;
-        orderStatus=os;
-        orderTotal=ot;
+        isRecommended=false;
+
     }
 
-    public int getOrderTotal() {
-        return orderTotal;
+    public Boolean getRecommended() {
+        return isRecommended;
     }
 
-    public void setOrderTotal(int orderTotal) {
-        this.orderTotal = orderTotal;
+    public void setRecommended(Boolean recommended) {
+        isRecommended = recommended;
     }
 
-    public int getOrderId() {
-        return orderId;
-    }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
 
     public String getTitle() {
         return title;

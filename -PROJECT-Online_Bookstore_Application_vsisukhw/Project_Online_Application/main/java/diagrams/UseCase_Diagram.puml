@@ -1,0 +1,74 @@
+@startuml
+!theme plain
+title OnlineBookstoreSystem - Use Case Diagram
+
+left to right direction
+actor Customer as C
+actor Admin as A
+
+rectangle "OnlineBookstoreSystem" {
+  ' Customer Use Cases
+  usecase (Browse Books) as UC1
+  usecase (Search Books by Title) as UC2
+  usecase (Search Books by Author) as UC3
+  usecase (View Book Details) as UC4
+  usecase (Add Book to Cart) as UC5
+  usecase (Remove Book from Cart) as UC6
+  usecase (View Cart) as UC7
+  usecase (Calculate Cart Total) as UC8
+  usecase (Place Order) as UC9
+  usecase (Cancel Order) as UC10
+  usecase (View Order History) as UC11
+  usecase (View Order Receipt) as UC12
+  usecase (View Recommended Books) as UC13
+  
+  ' Admin Use Cases
+  usecase (Add New Book) as UC14
+  usecase (Update Book Details) as UC15
+  usecase (Delete Book) as UC16
+  usecase (Set Book Recommendations) as UC17
+  usecase (Manage DynamoDB Tables) as UC18
+  
+  ' Customer Relationships
+  C --> UC1
+  C --> UC2
+  C --> UC3
+  C --> UC4
+  C --> UC5
+  C --> UC6
+  C --> UC7
+  C --> UC8
+  C --> UC9
+  C --> UC10
+  C --> UC11
+  C --> UC12
+  C --> UC13
+  
+  ' Admin Relationships
+  A --> UC14
+  A --> UC15
+  A --> UC16
+  A --> UC17
+  A --> UC18
+  
+  ' Include/Extend Relationships
+  UC5 .> UC4 : <<include>>
+  UC9 .> UC7 : <<include>>
+  UC9 .> UC8 : <<include>>
+  UC10 .> UC9 : <<extend>>
+  UC12 .> UC11 : <<extend>>
+}
+
+note right of C
+  Customer can browse, search,
+  manage cart, and place orders
+  using DynamoDB backend
+end note
+
+note right of A
+  Admin can manage books,
+  recommendations, and
+  DynamoDB infrastructure
+end note
+
+@enduml
